@@ -1,0 +1,31 @@
+.Parent_Style {
+  width: 100%;
+  border-collapse: collapse;
+  thead {
+    background-color: #F1F5FE;
+  }
+
+  td,
+  th {
+    text-align: left;
+    padding: 1rem 0.85rem;
+    border-top: 0.06rem solid var(--table-border);
+    vertical-align: center;
+    font-size: 0.975rem;
+    //  min-width: 70px;
+  }
+
+  th {
+    background-color: var(--sidebar-bg);
+    color: var(--darkGreen);
+    font-weight: 500;
+    font-size: 1rem;
+    // word-break: pbreak-all;
+  }
+
+  td {
+    color: "#303030";
+    // word-break: break-all;
+    // width: 100%;
+  }
+}

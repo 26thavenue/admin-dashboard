@@ -1,0 +1,24 @@
+.Parent_Style {
+  width: 100%;
+  border-collapse: collapse;
+}
+.Parent_Style thead {
+  background-color: #F1F5FE;
+}
+.Parent_Style td,
+.Parent_Style th {
+  text-align: left;
+  padding: 1rem 0.85rem;
+  border-top: 0.06rem solid var(--table-border);
+  vertical-align: center;
+  font-size: 0.975rem;
+}
+.Parent_Style th {
+  background-color: var(--sidebar-bg);
+  color: var(--darkGreen);
+  font-weight: 500;
+  font-size: 1rem;
+}
+.Parent_Style td {
+  color: "#303030";
+}/*# sourceMappingURL=table.module.css.map */

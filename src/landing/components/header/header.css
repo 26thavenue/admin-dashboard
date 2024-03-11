@@ -1,0 +1,20 @@
+/* @layer utilities {
+  .before {
+     background-color: unset;
+  }
+} */
+
+.active {
+  position: relative;
+}
+
+.active::before {
+  content: "";
+  position: absolute;
+  bottom: -10px; /* Adjust this value to position the line */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 2px; /* Adjust the height of the line */
+  background-color: white; /* Change to any color you want */
+}
