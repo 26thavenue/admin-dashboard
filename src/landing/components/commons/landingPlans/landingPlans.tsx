@@ -1,7 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Pricing from "../../../../app/dashboard/components/cards/pricing";
 import { Images } from "../../../../assets/images";
-import { PlansTopModal } from "./TopUpOptions";
+// import { PlansTopModal } from "./TopUpOptions";
 
 type TLandingPlans = {
   heading?: string;
@@ -49,11 +49,11 @@ function LandingPlans({
 export default LandingPlans;
 
 export function PlansCards() {
-  const [topUpModal, setTopUpModal] = useState(false);
+  // const [topUpModal, setTopUpModal] = useState(false);
   return (
     <div className="relative max-w-6xl mx-auto mt-12 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
       <Pricing
-        buy={() => setTopUpModal(true)}
+        // buy={() => setTopUpModal(true)}
         plan={"3GB Data"}
         amount={"300"}
       />
@@ -76,14 +76,14 @@ export function PlansCards() {
         amount={"300"}
         features={["Internation Stufss", "Great Pricing"]}
       />
-      {topUpModal && (
+      {/* {topUpModal && (
         <PlansTopModal
           setIsOpen={setTopUpModal}
           isOpen={topUpModal}
           // modal={modalFlip}
           // setModal={setModalFlip}
         />
-      )}
+      )} */}
     </div>
   );
 }

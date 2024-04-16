@@ -21,3 +21,7 @@ export enum ESteppers {
 
 
 
+export enum TRANSACTION_OPERATION {
+  DEBIT = "debit",
+  CREDIT = "credit",
+}
