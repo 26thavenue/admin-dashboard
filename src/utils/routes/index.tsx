@@ -8,8 +8,8 @@ import {
   Rates,
   NationalRates,
   History,
-  TopUp,
-  ConfirmTopUp,
+  // TopUp,
+  // ConfirmTopUp,
   Porting,
   Settings,
 } from "../../app/dashboard/pages";
@@ -31,6 +31,7 @@ import OrderPreview from "@/site/OrderPlan/Preview";
 import AccessControlView from "@/app/dashboard/pages/AccessControl/AccessControlView";
 import Customer from "@/app/dashboard/pages/Customer";
 import CustomerView from "@/app/dashboard/pages/Customer/CustomerView";
+import AdminProducts from "@/app/dashboard/pages/AdminProducts";
 
 const router = createBrowserRouter([
   {
@@ -175,6 +176,17 @@ const router = createBrowserRouter([
                 ],
               },
               {
+                path: `/${includeDashboardUrl(URLs.Products)}`,
+                element: <Outlet />,
+                children: [
+                  { index: true, element: <AdminProducts /> },
+                  {
+                    path: ":id/admin",
+                    element: <AccessControlView />,
+                  },
+                ],
+              },
+              {
                 path: `/${includeDashboardUrl(URLs.Customers)}`,
                 element: <Outlet />,
                 children: [
@@ -212,14 +224,14 @@ const router = createBrowserRouter([
                 ],
               },
 
-              {
-                path: `/${includeDashboardUrl(URLs.TopUp)}`,
-                element: <Outlet />,
-                children: [
-                  { index: true, element: <TopUp /> },
-                  { path: "confirm", element: <ConfirmTopUp /> },
-                ],
-              },
+              // {
+              //   path: `/${includeDashboardUrl(URLs.TopUp)}`,
+              //   element: <Outlet />,
+              //   children: [
+              //     { index: true, element: <TopUp /> },
+              //     { path: "confirm", element: <ConfirmTopUp /> },
+              //   ],
+              // },
               {
                 path: `/${includeDashboardUrl(URLs.Payments)}`,
                 element: <History />,
