@@ -3,6 +3,7 @@ export enum URLs {
 
   //Admin Routes
   Access_Control = "access-control",
+  Numbers_Ops = "numbers_ops",
   Customers = "customers",
   Products = "products",
   Providers = "providers",

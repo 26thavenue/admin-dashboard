@@ -32,6 +32,7 @@ import AccessControlView from "@/app/dashboard/pages/AccessControl/AccessControl
 import Customer from "@/app/dashboard/pages/Customer";
 import CustomerView from "@/app/dashboard/pages/Customer/CustomerView";
 import AdminProducts from "@/app/dashboard/pages/AdminProducts";
+import NumbersOperations from "@/app/dashboard/pages/NumbersOps";
 
 const router = createBrowserRouter([
   {
@@ -169,6 +170,17 @@ const router = createBrowserRouter([
                 element: <Outlet />,
                 children: [
                   { index: true, element: <History /> },
+                  {
+                    path: ":id/admin",
+                    element: <AccessControlView />,
+                  },
+                ],
+              },
+              {
+                path: `/${includeDashboardUrl(URLs.Numbers_Ops)}`,
+                element: <Outlet />,
+                children: [
+                  { index: true, element: <NumbersOperations /> },
                   {
                     path: ":id/admin",
                     element: <AccessControlView />,

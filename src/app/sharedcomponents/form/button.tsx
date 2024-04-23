@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   type?: "button" | "submit";
+  loading?: boolean;
   variant?: "primary" | "secondary" | "tertiary" | "original" | "blue-bordered";
 }
 
@@ -11,6 +12,7 @@ function Button({
   children,
   type = "submit",
   variant = "primary",
+  loading,
   ...props
 }: IButton) {
   let classes =
@@ -39,7 +41,7 @@ function Button({
 
   return (
     <button {...props} className={`${twMerge(classes, className)}`} type={type}>
-      {children}
+      {loading ? "Loading..." : children}
     </button>
   );
 }

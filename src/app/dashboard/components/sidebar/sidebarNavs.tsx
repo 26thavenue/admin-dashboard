@@ -1,15 +1,15 @@
-import { NavLink, useMatches, useMatch } from "react-router-dom";
+import { NavLink, useMatches} from "react-router-dom";
 import { TNavLinks } from "./index";
 import { CgChevronDown } from "react-icons/cg";
 import { useState } from "react";
 import ClickAwayListener from "./sidebarClickOut";
 
 function SidebarNavs({ name, icon, link, children }: TNavLinks) {
-  const match = useMatch(`/${link}` || "");
+  // const match = useMatch(`/${link}` || "");
   const matches = useMatches();
   const data = matches[3]?.pathname?.split("/")?.[2];
   const parent = link?.split("/")?.[1];
-  console.log({ match, matches, link, parent, data }, Boolean(match));
+  // console.log({ match, matches, link, parent, data }, Boolean(match));
   const [isOpen, setIsOpen] = useState(false);
 
   const isPresentUrl = parent !== data;

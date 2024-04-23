@@ -25,6 +25,12 @@ export const NavLinks = (filter_type?: string): TNavLinks[] => {
       link: includeDashboardUrl(URLs.Access_Control),
     },
     {
+      name: "Numbers Ops",
+      icon: <VscDiffAdded />,
+      type: SidebarContentTypes.Main,
+      link: includeDashboardUrl(URLs.Numbers_Ops),
+    },
+    {
       name: "Products",
       icon: <VscDiffAdded />,
       type: SidebarContentTypes.Main,
