@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, ReactNode } from "react";
+import { IoCloseOutline } from "react-icons/io5";
 import { twMerge } from "tailwind-merge";
 
 type TModal = {
@@ -58,9 +59,13 @@ export default function GlobalModal({
                 >
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-black"
+                    className="text-lg font-medium leading-6 text-black flex justify-between items-center"
                   >
                     {header}
+                    <IoCloseOutline
+                      onClick={closeModal}
+                      className="text-brand text-2xl cursor-pointer"
+                    />
                   </Dialog.Title>
                   <Dialog.Description as="small" className="text-sm">
                     {description}

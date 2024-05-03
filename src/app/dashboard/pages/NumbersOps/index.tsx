@@ -1,10 +1,15 @@
-import { Button, Form, FormInput } from "@/app/sharedcomponents/form";
+import {
+  Button,
+  Form,
+  FormInput,
+  FormSelect,
+} from "@/app/sharedcomponents/form";
 import DBHomeTemplate from "../template";
-import DBTable from "./DBTable";
+// import DBTable from "./DBTable";
 import { useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import TopUpModal from "../TopUp/TopUpModal";
 import { useCreateSimMutation } from "@/utils/redux/reducers/operations.reducers";
+import GlobalModal from "@/app/sharedcomponents/modals/GlobalModal";
 
 export type TNumberOperations = {
   serialNumber: string;
@@ -22,9 +27,9 @@ function NumbersOperations() {
       <div>
         <AddStaffAdmin />
       </div>
-      <div className="bg-white p-6 rounded-[12px]">
+      {/* <div className="bg-white p-6 rounded-[12px]">
         <DBTable />
-      </div>
+      </div> */}
     </DBHomeTemplate>
   );
 }
@@ -43,14 +48,21 @@ function AddStaffAdmin() {
   } = formMethods;
 
   const submit: SubmitHandler<TNumberOperations> = async (data) => {
-    await createSimCard({ ...data, network: Number(data?.network) });
+    const response = await createSimCard({
+      ...data,
+      network: Number(data?.network),
+    });
+
+    if ("error" in response) return;
+    setIsOpen(!isOpen);
   };
   return (
     <>
       <Button onClick={() => setIsOpen(!isOpen)} className="ml-auto block">
         Assign SIM Card
       </Button>
-      <TopUpModal
+
+      <GlobalModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         header={"Assign SIM Card"}
@@ -69,7 +81,12 @@ function AddStaffAdmin() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
                 <FormInput name="emailAddress" title="Email" type="email" />
-                <FormInput name="network" title="Network" type="numeric" />
+
+                <FormSelect name="network" title="Network" type="numeric">
+                  <option value={1}>O2</option>
+                  <option value={2}>Vodafone</option>
+                  <option value={3}>EE</option>
+                </FormSelect>
               </div>
               <Button disabled={!isValid || loading} loading={loading}>
                 Confirm
@@ -77,7 +94,7 @@ function AddStaffAdmin() {
             </>
           </Form>
         </FormProvider>
-      </TopUpModal>
+      </GlobalModal>
     </>
   );
 }
