@@ -1,7 +1,16 @@
+import { useGetCustomersQuery } from "@/utils/redux/reducers/customers.reducers";
 import DBHomeTemplate from "../template";
 import DBTable from "./DBTable";
 
 function Customer() {
+  const { data } = useGetCustomersQuery({
+    pageSize: 10,
+    page: 1,
+    fromDate: "2022-01-01",
+    toDate: "2025-12-31",
+  });
+
+  console.log({ data });
   return (
     <DBHomeTemplate
       name="Customers"
@@ -14,6 +23,4 @@ function Customer() {
   );
 }
 
-export default Customer
-
-
+export default Customer;
