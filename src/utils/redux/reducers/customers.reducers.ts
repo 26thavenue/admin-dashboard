@@ -11,7 +11,7 @@ export const customersApi = createApi({
       query: (payload) => ({
         url: "Admin/users",
         method: "GET",
-        body: payload,
+        // body: payload,
       }),
     }),
   }),
