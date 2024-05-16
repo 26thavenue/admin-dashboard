@@ -8,10 +8,9 @@ export const customersApi = createApi({
   reducerPath: "customersApi",
   endpoints: (builder) => ({
     getCustomers: builder.query({
-      query: (payload) => ({
+      query: () => ({
         url: "Admin/users",
         method: "GET",
-        // body: payload,
       }),
     }),
   }),

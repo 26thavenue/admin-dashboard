@@ -9,7 +9,7 @@ export default {
       colors: {
         brand: { ...colors.rose, DEFAULT: "#ff3793" },
         black: { ...colors.black, DEFAULT: "#303030" },
-        grey: { ...colors.grey, DEFAULT: "#7c8dB5" },
+        grey: { ...colors.grey, DEFAULT: "#7c8dB5", body: "#8E8EA1" },
         blue: { ...colors.blue, DEFAULT: "#1c68f5" },
       },
     },

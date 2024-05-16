@@ -1,8 +1,8 @@
 import Table from "../../components/table";
 import { useGetProductsQuery } from "@/utils/redux/reducers/products.reducers";
 import { CurrencyFormatter } from "@/utils/resources/general";
-import { Button } from "@/app/sharedcomponents/form";
 import ClipLoader from "react-spinners/ClipLoader";
+import TableStatus from "@/app/sharedcomponents/tableActions";
 
 interface MobilePlan {
   data: string;
@@ -23,10 +23,7 @@ interface MobilePlan {
 }
 
 export default function DBTable() {
-  const { data, isLoading: loading, error } = useGetProductsQuery({});
-
-  console.log({ data, loading, error });
-
+  const { data, isLoading: loading } = useGetProductsQuery({});
 
   if (loading) {
     return (
@@ -76,14 +73,8 @@ export default function DBTable() {
               <td>{plan?.data}</td>
               <td>{plan?.dataOptions}</td>
               <td>
-                <Button className={`${plan?.isActive ? 'bg-green-600' : 'bg-red-600'}`} type="button" >{plan?.isActive ? "Active" : "Inactive"}</Button>
+                <TableStatus status={plan?.isActive} />
               </td>
-              {/* <td>
-                <div className="text-brand flex flex-row items-center justify-center w-fit cursor-pointer gap-2 ">
-                  <IoEyeOutline />
-                  <span>View More</span>
-                </div>
-              </td> */}
             </tr>
           ))}
         </tbody>

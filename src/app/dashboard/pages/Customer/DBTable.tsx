@@ -1,11 +1,8 @@
-import { IoEyeOutline } from "react-icons/io5";
 import Table from "../../components/table";
-import { useNavigate } from "react-router-dom";
 import { useGetCustomersQuery } from "@/utils/redux/reducers/customers.reducers";
 import TableStatus from "@/app/sharedcomponents/tableActions";
 
 export default function DBTable() {
-  const navigate = useNavigate();
   const { data } = useGetCustomersQuery({
     pageSize: 10,
     page: 1,
@@ -35,8 +32,8 @@ export default function DBTable() {
                 lastName,
                 emailAddress,
                 isActive,
-                profileStatus,
-                onbaordingStatus,
+                // profileStatus,
+                // onbaordingStatus,
               } = data;
               return (
                 <tr key={index}>
@@ -45,17 +42,22 @@ export default function DBTable() {
                   <td>{lastName}</td>
                   <td>{emailAddress}</td>
                   <td>
-                    <TableStatus status={isActive} />{" "}
+                    <TableStatus status={isActive as boolean} />{" "}
                   </td>
                   <td></td>
                   <td></td>
-               
                 </tr>
               );
             }
           )}
         </tbody>
       </Table>
+      {/* <div className="flex items-center justify-between mt-4">
+        <p className="text-grey-body">
+          Showing <b>1</b> - <b>10</b> from <b>100</b> records
+        </p>
+        <div>Page</div>
+      </div> */}
     </div>
   );
 }
