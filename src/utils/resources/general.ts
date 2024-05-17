@@ -1,4 +1,5 @@
 import { TRANSACTION_OPERATION } from "../enums/dashboard.enums";
+import moment from "moment"
 
 export function CurrencyFormatter(
   amount?: number,
@@ -17,6 +18,21 @@ export function CurrencyFormatter(
   }
   return formattedAmount;
 }
+
+
+export const FormatDateTime = (value: string, isDate?: string) => {
+  let timeDate;
+
+  if (isDate === "calender") {
+    timeDate = moment(value).calendar();
+
+    return timeDate;
+  }
+
+  timeDate = moment(value).format(isDate || "LL");
+
+  return !value ? "" : timeDate;
+};
 
 function redirectUser(urlPath: string, timeout: number) {
   setTimeout(function () {

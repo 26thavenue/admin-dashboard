@@ -33,6 +33,8 @@ import Customer from "@/app/dashboard/pages/Customer";
 import CustomerView from "@/app/dashboard/pages/Customer/CustomerView";
 import AdminProducts from "@/app/dashboard/pages/AdminProducts";
 import NumbersOperations from "@/app/dashboard/pages/NumbersOps";
+import Subscriptions from "@/app/dashboard/pages/Subscriptions";
+import Transactions from "@/app/dashboard/pages/Transactions";
 
 const router = createBrowserRouter([
   {
@@ -203,6 +205,28 @@ const router = createBrowserRouter([
                 element: <Outlet />,
                 children: [
                   { index: true, element: <Customer /> },
+                  {
+                    path: ":id/admin",
+                    element: <CustomerView />,
+                  },
+                ],
+              },
+              {
+                path: `/${includeDashboardUrl(URLs.Subscriptions)}`,
+                element: <Outlet />,
+                children: [
+                  { index: true, element: <Subscriptions /> },
+                  {
+                    path: ":id/admin",
+                    element: <CustomerView />,
+                  },
+                ],
+              },
+              {
+                path: `/${includeDashboardUrl(URLs.Transactions)}`,
+                element: <Outlet />,
+                children: [
+                  { index: true, element: <Transactions /> },
                   {
                     path: ":id/admin",
                     element: <CustomerView />,

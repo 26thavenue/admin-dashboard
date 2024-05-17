@@ -1,14 +1,19 @@
 import Table from "../../components/table";
 import { useGetCustomersQuery } from "@/utils/redux/reducers/customers.reducers";
 import TableStatus from "@/app/sharedcomponents/tableActions";
+import PageLoader from "@/app/sharedcomponents/pageLoader";
 
 export default function DBTable() {
-  const { data } = useGetCustomersQuery({
+  const { data, isLoading: loading } = useGetCustomersQuery({
     pageSize: 10,
     page: 1,
     fromDate: "2022-01-01",
     toDate: "2025-12-31",
   });
+
+  if (loading) {
+    return <PageLoader loading={loading}/>;
+  }
   return (
     <div className="w-full overflow-scroll md:overflow-auto">
       <Table>

@@ -2,6 +2,7 @@ import {
   VscGraph,
   VscPieChart,
   VscDiffAdded,
+  VscChecklist,
   // VscLayers,
   // VscAccount,
   // VscChecklist,
@@ -54,30 +55,18 @@ export const NavLinks = (filter_type?: string): TNavLinks[] => {
     //   type: SidebarContentTypes.Main,
     //   link: includeDashboardUrl(URLs.Providers),
     // },
-    // {
-    //   name: "Transactions",
-    //   icon: <VscChecklist />,
-    //   type: SidebarContentTypes.Main,
-    //   link: includeDashboardUrl(URLs.Transactions),
-    //   children: [
-    //     {
-    //       name: "Monthly Plan",
-    //       link: URLs.Plan_Monthly,
-    //     },
-    //     {
-    //       name: "PAYG Plan",
-    //       link: URLs.Plan_PayG,
-    //     },
-    //     {
-    //       name: "International Plan",
-    //       link: URLs.Plan_International,
-    //     },
-    //     {
-    //       name: "Data Plan",
-    //       link: URLs.Plan_Data,
-    //     },
-    //   ],
-    // },
+    {
+      name: "Subscriptions",
+      icon: <VscChecklist />,
+      type: SidebarContentTypes.Main,
+      link: includeDashboardUrl(URLs.Subscriptions),
+    },
+    {
+      name: "Transactions",
+      icon: <VscChecklist />,
+      type: SidebarContentTypes.Main,
+      link: includeDashboardUrl(URLs.Transactions),
+    },
     // {
     //   name: "Audit Trail",
     //   icon: <VscAccount />,

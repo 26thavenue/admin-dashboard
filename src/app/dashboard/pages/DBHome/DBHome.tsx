@@ -1,7 +1,7 @@
 import Stats from "../../components/cards/stats";
 import DBHomeTemplate from "../template";
 import { DBImages } from "./DBImageImports";
-import DBTable from "./DBTable";
+// import DBTable from "./DBTable";
 
 function DBHome() {
   return (
@@ -40,7 +40,7 @@ function DBHome() {
         />
       </div>
 
-      <div className="bg-white p-6 rounded-[12px]">
+      {/* <div className="bg-white p-6 rounded-[12px]">
         <div className="flex items-center justify-between">
           <h3 className="text-[18px] font-medium mb-5">Recent Orders</h3>
           <p>View Orders</p>
@@ -53,7 +53,7 @@ function DBHome() {
           <p>View Transaction</p>
         </div>
         <DBTable />
-      </div>
+      </div> */}
     </DBHomeTemplate>
   );
 }

@@ -1,3 +1,4 @@
+
 export enum URLs {
   Home = "/",
 
@@ -5,39 +6,32 @@ export enum URLs {
   Access_Control = "access-control",
   Numbers_Ops = "numbers_ops",
   Customers = "customers",
+  Subscriptions = "subscriptions",
   Products = "products",
   Providers = "providers",
   Transactions = "transactions",
   Audit_Trail = "Audit Trail",
   Integrations = "Integrations",
 
-
-
-
   Product_Plans = "plans",
   Product_Plans_PaygA = "payg",
   Product_Plans_TalkLonger = "talk-longer",
   Product_Plans_DataOnly = "data",
 
-  Home_Rates="rates", 
-  Home_Rates_International="international_rates",
-  Home_Rates_Special="special_rates",
-  Home_Rates_Roaming="roaming_rate",
-  Home_Help="help",
+  Home_Rates = "rates",
+  Home_Rates_International = "international_rates",
+  Home_Rates_Special = "special_rates",
+  Home_Rates_Roaming = "roaming_rate",
+  Home_Help = "help",
 
   Order_Sim = "Order_Sim",
   Order_Preview = "preview",
   Order_Payment = "payment",
 
-
-
   Why_Talk4 = "why",
   Why_Talk4_Us = "us",
   Why_Talk4_Transfer = "transfer",
   Resources = "resources",
-
-
-
 
   //Auth Routes
   Auth = "auth",
