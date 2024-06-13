@@ -35,6 +35,7 @@ import AdminProducts from "@/app/dashboard/pages/AdminProducts";
 import NumbersOperations from "@/app/dashboard/pages/NumbersOps";
 import Subscriptions from "@/app/dashboard/pages/Subscriptions";
 import Transactions from "@/app/dashboard/pages/Transactions";
+import AdminCreateProducts from "@/app/dashboard/pages/AdminProducts/CreateProducts";
 
 const router = createBrowserRouter([
   {
@@ -197,6 +198,10 @@ const router = createBrowserRouter([
                   {
                     path: ":id/admin",
                     element: <AccessControlView />,
+                  },
+                  {
+                    path: "create",
+                    element: <AdminCreateProducts />,
                   },
                 ],
               },

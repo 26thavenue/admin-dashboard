@@ -51,7 +51,7 @@ const FormSelect = ({
             },
             ...moreRegister,
           })}
-          className={`py-[12px] px-[10px] rounded-md border border-gray-300 outline-none w-[100%] shadow-sm text-[16px] ${className}`}
+          className={`py-[8px] px-[10px] rounded-md border border-gray-300 outline-none w-[100%] shadow-sm text-[15px] ${className}`}
         >
           <option value="">{placeholderText}</option>
           {children}
