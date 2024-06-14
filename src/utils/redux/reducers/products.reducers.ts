@@ -18,6 +18,20 @@ export const productApi = createApi({
   baseQuery: api,
   reducerPath: "productApi",
   endpoints: (builder) => ({
+    createProducts: builder.mutation({
+      query: (payload) => ({
+        url: "products",
+        method: "POST",
+        body: payload,
+      }),
+    }),
+    createPlans: builder.mutation({
+      query: (payload) => ({
+        url: "products/plan",
+        method: "POST",
+        body: payload,
+      }),
+    }),
     getProducts: builder.query({
       query: () => ({
         url: "products",
@@ -75,4 +89,6 @@ export const {
   useBuySingleProductMutation,
   useVerifySecretMutation,
   useQueryVerifySecretQuery,
+  useCreateProductsMutation,
+  useCreatePlansMutation
 } = productApi;

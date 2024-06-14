@@ -7,8 +7,8 @@ import {
   FormSelect,
 } from "@/app/sharedcomponents/form";
 import FormTextfield from "@/app/sharedcomponents/form/textfield";
-import { useCreateProductsMutation } from "@/utils/redux/reducers/products.reducers";
-import { useNavigate } from "react-router-dom";
+import { useCreatePlansMutation } from "@/utils/redux/reducers/products.reducers";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface FormData {
   currency: string;
@@ -29,9 +29,10 @@ interface FormData {
   isCustom: string;
 }
 
-function AdminCreateProducts() {
-  const [createProduct, { isLoading: creating }] = useCreateProductsMutation();
+function AdminCreatePlans() {
+  const [createPlan, { isLoading: creating }] = useCreatePlansMutation();
   const navigate = useNavigate();
+  const params = useParams();
   const formMethods = useForm<FormData>({
     mode: "all",
   });
@@ -48,9 +49,10 @@ function AdminCreateProducts() {
       sellPrice: Number(data?.sellPrice),
       interval: Number(data?.interval),
       isCustom: Boolean(data?.isCustom),
+      product_sku: params?.id,
     };
 
-    const response = await createProduct(payload);
+    const response = await createPlan(payload);
 
     if ("data" in response) {
       if ("message" in response.data && response?.data?.message === "OK") {
@@ -61,7 +63,7 @@ function AdminCreateProducts() {
     console.log({ response });
   };
   return (
-    <DBHomeTemplate name="Create Product" supportText="Create New Product">
+    <DBHomeTemplate name="Create Plan" supportText="Create New Plan">
       <div className="bg-white p-6 rounded-[12px]">
         <FormProvider {...formMethods}>
           <Form onSubmit={handleSubmit(submit)}>
@@ -171,4 +173,4 @@ function AdminCreateProducts() {
   );
 }
 
-export default AdminCreateProducts;
+export default AdminCreatePlans;

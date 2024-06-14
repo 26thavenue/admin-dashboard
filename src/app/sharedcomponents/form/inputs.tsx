@@ -18,7 +18,7 @@ interface TFormInput extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   moreRegister?: RegisterConfig;
   hasPassword?: true | false;
-  type?: "password" | "text" | "email" | "tel" | "numeric" | "date";
+  type?: "password" | "text" | "email" | "tel" | "numeric" | "date" | "number";
 }
 
 function FormInput({
@@ -44,7 +44,7 @@ function FormInput({
       </div>
       <div>
         <input
-          className="py-[8px] px-[10px] rounded-md border border-gray-300 outline-none w-[100%] shadow-sm text-[15px]"
+          className="h-10 text-base px-4 py-2 rounded-md border border-gray-300 outline-none w-[100%] shadow-sm"
           placeholder={placeholder}
           type={
             hasPassword === true ? `${!appSwitch ? "password" : "text"}` : type

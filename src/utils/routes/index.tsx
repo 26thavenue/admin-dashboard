@@ -8,8 +8,6 @@ import {
   Rates,
   NationalRates,
   History,
-  // TopUp,
-  // ConfirmTopUp,
   Porting,
   Settings,
 } from "../../app/dashboard/pages";
@@ -36,6 +34,7 @@ import NumbersOperations from "@/app/dashboard/pages/NumbersOps";
 import Subscriptions from "@/app/dashboard/pages/Subscriptions";
 import Transactions from "@/app/dashboard/pages/Transactions";
 import AdminCreateProducts from "@/app/dashboard/pages/AdminProducts/CreateProducts";
+import AdminCreatePlans from "@/app/dashboard/pages/AdminProducts/CreatePlans";
 
 const router = createBrowserRouter([
   {
@@ -202,6 +201,10 @@ const router = createBrowserRouter([
                   {
                     path: "create",
                     element: <AdminCreateProducts />,
+                  },
+                  {
+                    path: ":id",
+                    element: <AdminCreatePlans />,
                   },
                 ],
               },
