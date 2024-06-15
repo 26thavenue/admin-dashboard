@@ -60,7 +60,6 @@ function AdminCreatePlans() {
       }
     }
 
-    console.log({ response });
   };
   return (
     <DBHomeTemplate name="Create Plan" supportText="Create New Plan">
