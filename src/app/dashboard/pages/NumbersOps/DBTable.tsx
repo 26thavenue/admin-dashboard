@@ -1,38 +1,51 @@
-import { IoEyeOutline } from "react-icons/io5";
 import Table from "../../components/table";
-import { useNavigate } from "react-router-dom";
+import { useFetchPendingSimsQuery } from "@/utils/redux/reducers/operations.reducers";
+import { TNumbDetails } from "../NumbersOps";
 
-export default function DBTable() {
-  const navigate = useNavigate();
+export default function NumberOpsTable({
+  changeNumberDetails,
+}: {
+  changeNumberDetails: (data: TNumbDetails) => void;
+}) {
+
+  const { data: new_sims } = useFetchPendingSimsQuery({
+    page: 1,
+    pageSize: 10000,
+    simStatus: -1,
+  });
+
   return (
     <div className="w-full overflow-scroll md:overflow-auto">
       <Table>
         <thead>
           <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Department</th>
-            <th>Role</th>
-            <th>Date Created</th>
-            <th>Last Login Date</th>
+            <th>Email</th>
+            <th>Network</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr onClick={() => navigate("1/admin")}>
-            <td>1</td>
-            <td>Boris Rivera</td>
-            <td>Finance</td>
-            <td>Super Admin</td>
-            <td>25th Dec. 2023</td>
-            <td>25th Dec. 2023</td>
-            <td>
-              <div className="text-brand flex flex-row items-center justify-center w-fit cursor-pointer gap-2 ">
-                <IoEyeOutline />
-                <span>View More</span>
-              </div>
-            </td>
-          </tr>
+          {new_sims?.result?.results?.map?.(
+            (
+              sim: { emailAddress: string; networkDescription: string; network: number },
+              index: number
+            ) => {
+              return (
+                <tr key={index} >
+                  <td>{index + 1}</td>
+                  <td>{sim?.emailAddress}</td>
+                  <td>{sim?.networkDescription}</td>
+                  <td
+                    onClick={() => changeNumberDetails(sim)}
+                    className="text-blue cursor-pointer"
+                  >
+                    Assign SIM
+                  </td>
+                </tr>
+              );
+            }
+          )}
         </tbody>
       </Table>
     </div>

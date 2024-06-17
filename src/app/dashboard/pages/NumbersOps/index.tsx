@@ -6,10 +6,11 @@ import {
 } from "@/app/sharedcomponents/form";
 import DBHomeTemplate from "../template";
 // import DBTable from "./DBTable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { useCreateSimMutation } from "@/utils/redux/reducers/operations.reducers";
 import GlobalModal from "@/app/sharedcomponents/modals/GlobalModal";
+import NumberOpsTable from "./DBTable";
 
 export type TNumberOperations = {
   serialNumber: string;
@@ -18,40 +19,76 @@ export type TNumberOperations = {
   network: number;
 };
 
+export type TNumbDetails = {
+  emailAddress: string;
+  network: number;
+};
+
 function NumbersOperations() {
+  const [numDetails, setNumberDetails] = useState<TNumbDetails>({
+    emailAddress: "",
+    network: 0,
+  });
+
+  const changeNumberDetails = (data: TNumbDetails) => {
+    setNumberDetails(data);
+  };
+
   return (
     <DBHomeTemplate
       name="Number Operations"
       supportText="Manage how phone numbers are allocated and managed."
     >
       <div>
-        <AddStaffAdmin />
+        <AddStaffAdmin numDetails={numDetails} />
       </div>
-      {/* <div className="bg-white p-6 rounded-[12px]">
-        <DBTable />
-      </div> */}
+      <div className="bg-white p-6 rounded-[12px]">
+        <NumberOpsTable
+          changeNumberDetails={(data: TNumbDetails) =>
+            changeNumberDetails(data)
+          }
+        />
+      </div>
     </DBHomeTemplate>
   );
 }
 
 export default NumbersOperations;
 
-function AddStaffAdmin() {
+function AddStaffAdmin({ numDetails }: { numDetails: TNumbDetails }) {
   const [createSimCard, { isLoading: loading }] = useCreateSimMutation();
   const [isOpen, setIsOpen] = useState(false);
   const formMethods = useForm<TNumberOperations>({
     mode: "all",
+    defaultValues: {
+      ...numDetails,
+    },
   });
   const {
     handleSubmit,
+    reset,
+    watch,
     formState: { isValid },
   } = formMethods;
+
+
+  console.log(watch(), numDetails)
+
+  useEffect(() => {
+    if (numDetails?.network !== 0) {
+      setIsOpen(true);
+    }
+  }, [numDetails]);
 
   const submit: SubmitHandler<TNumberOperations> = async (data) => {
     const response = await createSimCard({
       ...data,
       network: Number(data?.network),
     });
+
+    if (response) {
+      reset();
+    }
 
     if ("error" in response) return;
     setIsOpen(!isOpen);

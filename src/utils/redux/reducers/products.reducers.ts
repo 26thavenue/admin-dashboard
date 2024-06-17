@@ -38,6 +38,13 @@ export const productApi = createApi({
         method: "GET",
       }),
     }),
+    getProductsPlans: builder.query({
+      query: (params) => ({
+        url: "products/plans",
+        method: "GET",
+        params: params,
+      }),
+    }),
     getWebsiteSingleProduct: builder.query({
       query: (params) => ({
         url: "products/plan",
@@ -85,10 +92,11 @@ export const productApi = createApi({
 
 export const {
   useGetProductsQuery,
+  useGetProductsPlansQuery,
   useGetWebsiteSingleProductQuery,
   useBuySingleProductMutation,
   useVerifySecretMutation,
   useQueryVerifySecretQuery,
   useCreateProductsMutation,
-  useCreatePlansMutation
+  useCreatePlansMutation,
 } = productApi;

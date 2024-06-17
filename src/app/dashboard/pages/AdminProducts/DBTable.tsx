@@ -3,6 +3,7 @@ import { useGetProductsQuery } from "@/utils/redux/reducers/products.reducers";
 import { CurrencyFormatter } from "@/utils/resources/general";
 import ClipLoader from "react-spinners/ClipLoader";
 import TableStatus from "@/app/sharedcomponents/tableActions";
+import { useNavigate } from "react-router-dom";
 
 interface MobilePlan {
   data: string;
@@ -24,6 +25,7 @@ interface MobilePlan {
 
 export default function DBTable() {
   const { data, isLoading: loading } = useGetProductsQuery({});
+  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -55,7 +57,7 @@ export default function DBTable() {
             <th>Data</th>
             <th>Data Option</th>
             <th>Status</th>
-            {/* <th>Actions</th> */}
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -74,6 +76,25 @@ export default function DBTable() {
               <td>{plan?.dataOptions}</td>
               <td>
                 <TableStatus status={plan?.isActive} />
+              </td>
+              <td>
+                <span
+                  onClick={() =>
+                    navigate(`./${plan?.productSku}/${plan?.name}`)
+                  }
+                  className="text-blue cursor-pointer"
+                >
+                  Add Plan
+                </span>{" "}
+                |{" "}
+                <span
+                  onClick={() =>
+                    navigate(`./plans/${plan?.productSku}/${plan?.name}`)
+                  }
+                  className="text-brand cursor-pointer"
+                >
+                  View Plans
+                </span>
               </td>
             </tr>
           ))}

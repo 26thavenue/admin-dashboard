@@ -35,6 +35,7 @@ import Subscriptions from "@/app/dashboard/pages/Subscriptions";
 import Transactions from "@/app/dashboard/pages/Transactions";
 import AdminCreateProducts from "@/app/dashboard/pages/AdminProducts/CreateProducts";
 import AdminCreatePlans from "@/app/dashboard/pages/AdminProducts/CreatePlans";
+import PlansTable from "@/app/dashboard/pages/AdminProducts/PlansTables";
 
 const router = createBrowserRouter([
   {
@@ -203,8 +204,12 @@ const router = createBrowserRouter([
                     element: <AdminCreateProducts />,
                   },
                   {
-                    path: ":id",
+                    path: ":id/:name",
                     element: <AdminCreatePlans />,
+                  },
+                  {
+                    path: "plans/:id/:name",
+                    element: <PlansTable />,
                   },
                 ],
               },

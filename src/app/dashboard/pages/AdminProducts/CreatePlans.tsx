@@ -9,6 +9,7 @@ import {
 import FormTextfield from "@/app/sharedcomponents/form/textfield";
 import { useCreatePlansMutation } from "@/utils/redux/reducers/products.reducers";
 import { useNavigate, useParams } from "react-router-dom";
+import { Notify } from "@/utils/resources/toast";
 
 interface FormData {
   currency: string;
@@ -56,20 +57,31 @@ function AdminCreatePlans() {
 
     if ("data" in response) {
       if ("message" in response.data && response?.data?.message === "OK") {
-        navigate(`../${data?.sku}`);
+        navigate("../");
+        Notify().showSuccessNotification(response?.data?.message || "Plan Created Successfully")
       }
     }
 
   };
+
+
+  
   return (
-    <DBHomeTemplate name="Create Plan" supportText="Create New Plan">
+    <DBHomeTemplate
+      name={`Create A Plan for ${params?.name || "Your Product"}`}
+      supportText="Create New Plan"
+    >
       <div className="bg-white p-6 rounded-[12px]">
         <FormProvider {...formMethods}>
           <Form onSubmit={handleSubmit(submit)}>
-            <p className="font-medium">Product Details</p>
+            <p className="font-medium">Plans Details</p>
             <div>
               <div className="grid grid-cols-3 gap-3 gap-y-6 mb-3">
-                <FormInput name="currency" title="Currency" type="text" />
+                {/* <FormInput name="currency" title="Currency" type="text" /> */}
+                <FormSelect name="currency" title="Currency" type="text">
+                  <option value={"GBP"}>GBP</option>
+                  <option value={"USD"}>USD</option>
+                </FormSelect>
                 <FormInput name="name" title="Name" type="text" />
                 <FormInput name="imageUrl" title="Image URL" type="text" />
               </div>
@@ -82,11 +94,11 @@ function AdminCreatePlans() {
             <p className="font-medium">Network and Pricing Details</p>
             <div>
               <div className="grid grid-cols-3 gap-3 gap-y-6 mb-3">
-                <FormSelect name="network" title="Network" type="numeric">
+                {/* <FormSelect name="network" title="Network" type="numeric">
                   <option value={1}>O2</option>
                   <option value={2}>Vodafone</option>
                   <option value={3}>EE</option>
-                </FormSelect>
+                </FormSelect> */}
                 <FormInput
                   name="sellPrice"
                   title="Sell Price"
@@ -102,7 +114,7 @@ function AdminCreatePlans() {
               </div>
             </div>
             <p className="font-medium">Product Features</p>
-            <div>
+            {/* <div>
               <div className="grid grid-cols-3 gap-3 gap-y-6 mb-3">
                 <FormSelect
                   name="tarrifType"
@@ -156,13 +168,13 @@ function AdminCreatePlans() {
                   <option value={"false"}>False</option>
                 </FormSelect>
               </div>
-            </div>
+            </div> */}
             <div className="flex gap-4 justify-end">
               <Button variant={"secondary"} disabled={!isValid}>
                 Cancel
               </Button>
               <Button loading={creating} disabled={!isValid || creating}>
-                Create Product
+                Create Plan
               </Button>
             </div>
           </Form>

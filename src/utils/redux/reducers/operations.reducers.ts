@@ -1,22 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  createApi,
-  //  FetchBaseQueryError
-} from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 
-// import { SerializedError } from "@reduxjs/toolkit";
 import { api } from "../api";
 import { TNumberOperations } from "@/app/dashboard/pages/NumbersOps";
-
-// interface ApiResponse<T> {
-//   data?: T | Record<string, string> | string;
-//   error?: FetchBaseQueryError | SerializedError;
-//   result?: T;
-// }
-
-// interface ApiError {
-//   message: string;
-// }
 
 export const operationsApi = createApi({
   baseQuery: api,
@@ -29,8 +14,14 @@ export const operationsApi = createApi({
         body: payload,
       }),
     }),
-    
+    fetchPendingSims: builder.query({
+      query: (params) => ({
+        url: "Admin/sims",
+        method: "GET",
+        params: params,
+      }),
+    }),
   }),
 });
 
-export const { useCreateSimMutation } = operationsApi;
+export const { useCreateSimMutation, useFetchPendingSimsQuery } = operationsApi;
