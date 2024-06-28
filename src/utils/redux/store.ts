@@ -8,9 +8,11 @@ import {
   authApi,
   profileApi,
 } from "./reducers";
+import { OperationsSlice } from "./slices";
 
 export const store = configureStore({
   reducer: {
+    operations: OperationsSlice,
     [authApi.reducerPath]: authApi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
     [productApi.reducerPath]: productApi.reducer,

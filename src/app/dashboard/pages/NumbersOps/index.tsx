@@ -5,12 +5,16 @@ import {
   FormSelect,
 } from "@/app/sharedcomponents/form";
 import DBHomeTemplate from "../template";
-// import DBTable from "./DBTable";
-import { useEffect, useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { useCreateSimMutation } from "@/utils/redux/reducers/operations.reducers";
 import GlobalModal from "@/app/sharedcomponents/modals/GlobalModal";
 import NumberOpsTable from "./DBTable";
+import { useSelector } from "react-redux";
+import {
+  operationsSelector,
+  toggleNumberOpsModal,
+} from "@/utils/redux/slices/operation.slice";
+import { useDispatch } from "react-redux";
 
 export type TNumberOperations = {
   serialNumber: string;
@@ -25,29 +29,16 @@ export type TNumbDetails = {
 };
 
 function NumbersOperations() {
-  const [numDetails, setNumberDetails] = useState<TNumbDetails>({
-    emailAddress: "",
-    network: 0,
-  });
-
-  const changeNumberDetails = (data: TNumbDetails) => {
-    setNumberDetails(data);
-  };
-
   return (
     <DBHomeTemplate
       name="Number Operations"
       supportText="Manage how phone numbers are allocated and managed."
     >
       <div>
-        <AddStaffAdmin numDetails={numDetails} />
+        <AddStaffAdmin />
       </div>
       <div className="bg-white p-6 rounded-[12px]">
-        <NumberOpsTable
-          changeNumberDetails={(data: TNumbDetails) =>
-            changeNumberDetails(data)
-          }
-        />
+        <NumberOpsTable />
       </div>
     </DBHomeTemplate>
   );
@@ -55,13 +46,16 @@ function NumbersOperations() {
 
 export default NumbersOperations;
 
-function AddStaffAdmin({ numDetails }: { numDetails: TNumbDetails }) {
+function AddStaffAdmin() {
   const [createSimCard, { isLoading: loading }] = useCreateSimMutation();
-  const [isOpen, setIsOpen] = useState(false);
+  const num_ops = useSelector(operationsSelector);
+  const dispatch = useDispatch();
+  console.log({ num_ops }, { ...num_ops?.number_ops });
+  // const [isOpen, setIsOpen] = useState(false);
   const formMethods = useForm<TNumberOperations>({
     mode: "all",
     defaultValues: {
-      ...numDetails,
+      ...num_ops?.number_ops,
     },
   });
   const {
@@ -71,14 +65,7 @@ function AddStaffAdmin({ numDetails }: { numDetails: TNumbDetails }) {
     formState: { isValid },
   } = formMethods;
 
-
-  console.log(watch(), numDetails)
-
-  useEffect(() => {
-    if (numDetails?.network !== 0) {
-      setIsOpen(true);
-    }
-  }, [numDetails]);
+  console.log("watch", watch());
 
   const submit: SubmitHandler<TNumberOperations> = async (data) => {
     const response = await createSimCard({
@@ -91,47 +78,61 @@ function AddStaffAdmin({ numDetails }: { numDetails: TNumbDetails }) {
     }
 
     if ("error" in response) return;
-    setIsOpen(!isOpen);
+    // setIsOpen(!isOpen);
   };
   return (
     <>
-      <Button onClick={() => setIsOpen(!isOpen)} className="ml-auto block">
+      <Button
+        onClick={() => dispatch(toggleNumberOpsModal({ isOpen: true }))}
+        className="ml-auto block"
+      >
         Assign SIM Card
       </Button>
 
-      <GlobalModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        header={"Assign SIM Card"}
-        description={"Fill the fields below to Get Started"}
-      >
-        <FormProvider {...formMethods}>
-          <Form onSubmit={handleSubmit(submit)}>
-            <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
-                <FormInput
-                  name="serialNumber"
-                  title="Serial Number"
-                  type="text"
-                />
-                <FormInput name="simNumber" title="SIM Number" type="numeric" />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
-                <FormInput name="emailAddress" title="Email" type="email" />
+      {num_ops?.number_ops?.isOpen && (
+        <GlobalModal
+          isOpen={num_ops?.number_ops?.isOpen || false}
+          // setIsOpen={setIsOpen}
+          closeAction={() =>
+            dispatch(
+              toggleNumberOpsModal({ isOpen: !num_ops.number_ops.isOpen })
+            )
+          }
+          header={"Assign SIM Card"}
+          description={"Fill the fields below to Get Started"}
+        >
+          <FormProvider {...formMethods}>
+            <Form onSubmit={handleSubmit(submit)}>
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                  <FormInput
+                    name="serialNumber"
+                    title="Serial Number"
+                    type="text"
+                  />
+                  <FormInput
+                    name="simNumber"
+                    title="SIM Number"
+                    type="numeric"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                  <FormInput name="emailAddress" title="Email" type="email" />
 
-                <FormSelect name="network" title="Network" type="numeric">
-                  <option value={1}>O2</option>
-                  <option value={2}>Vodafone</option>
-                  <option value={3}>EE</option>
-                </FormSelect>
-              </div>
-              <Button disabled={!isValid || loading} loading={loading}>
-                Confirm
-              </Button>
-            </>
-          </Form>
-        </FormProvider>
-      </GlobalModal>
+                  <FormSelect name="network" title="Network" type="numeric">
+                    <option value={1}>O2</option>
+                    <option value={2}>Vodafone</option>
+                    <option value={3}>EE</option>
+                  </FormSelect>
+                </div>
+                <Button disabled={!isValid || loading} loading={loading}>
+                  Confirm
+                </Button>
+              </>
+            </Form>
+          </FormProvider>
+        </GlobalModal>
+      )}
     </>
   );
 }

@@ -10,6 +10,7 @@ type TModal = {
   children?: ReactNode;
   isOpen?: boolean;
   setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  closeAction?: () => void
 };
 
 export default function GlobalModal({
@@ -19,9 +20,11 @@ export default function GlobalModal({
   children,
   isOpen,
   setIsOpen,
+  closeAction
 }: TModal) {
   function closeModal() {
     setIsOpen && setIsOpen(!isOpen);
+    closeAction && closeAction()
   }
 
   return (
