@@ -36,6 +36,7 @@ import Transactions from "@/app/dashboard/pages/Transactions";
 import AdminCreateProducts from "@/app/dashboard/pages/AdminProducts/CreateProducts";
 import AdminCreatePlans from "@/app/dashboard/pages/AdminProducts/CreatePlans";
 import PlansTable from "@/app/dashboard/pages/AdminProducts/PlansTables";
+import AssignNumberOperations from "@/app/dashboard/pages/NumbersOps/AssignNumberOperations";
 
 const router = createBrowserRouter([
   {
@@ -187,6 +188,10 @@ const router = createBrowserRouter([
                   {
                     path: ":id/admin",
                     element: <AccessControlView />,
+                  },
+                  {
+                    path: ":networkDescription/:network/:emailAddress/:random/assign",
+                    element: <AssignNumberOperations />,
                   },
                 ],
               },

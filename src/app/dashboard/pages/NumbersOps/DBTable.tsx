@@ -1,7 +1,6 @@
 import Table from "../../components/table";
 import { useFetchPendingSimsQuery } from "@/utils/redux/reducers/operations.reducers";
-import { useDispatch } from "react-redux";
-import { prefillNumberOpsModal } from "@/utils/redux/slices/operation.slice";
+import useNumberOps from "./useNumberOps";
 
 export default function NumberOpsTable() {
   const { data: new_sims } = useFetchPendingSimsQuery({
@@ -10,7 +9,7 @@ export default function NumberOpsTable() {
     simStatus: -1,
   });
 
-  const dispatch = useDispatch();
+  const { navigateToAssignNumber } = useNumberOps();
 
   return (
     <div className="w-full overflow-scroll md:overflow-auto">
@@ -39,7 +38,7 @@ export default function NumberOpsTable() {
                   <td>{sim?.emailAddress}</td>
                   <td>{sim?.networkDescription}</td>
                   <td
-                    onClick={() => dispatch(prefillNumberOpsModal(sim))}
+                    onClick={() => navigateToAssignNumber({sim})}
                     className="text-blue cursor-pointer"
                   >
                     Assign SIM
