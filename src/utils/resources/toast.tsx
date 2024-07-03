@@ -49,7 +49,7 @@ class Notification extends React.Component {
   }
 }
 
-export default Notification;
+
 
 export const Notify = () => {
   const notification = new Notification({});

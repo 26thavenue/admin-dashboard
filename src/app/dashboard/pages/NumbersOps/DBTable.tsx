@@ -3,7 +3,11 @@ import { useFetchPendingSimsQuery } from "@/utils/redux/reducers/operations.redu
 import useNumberOps from "./useNumberOps";
 
 export default function NumberOpsTable() {
-  const { data: new_sims } = useFetchPendingSimsQuery({
+  const {
+    data: new_sims,
+    isLoading: loading,
+    error,
+  } = useFetchPendingSimsQuery({
     page: 1,
     pageSize: 10000,
     simStatus: -1,
@@ -12,6 +16,14 @@ export default function NumberOpsTable() {
   const { navigateToAssignNumber } = useNumberOps();
 
   console.log({ new_sims });
+
+  if (loading) {
+    return <p>Loading Records...</p>;
+  }
+
+  if (error) {
+    return <p>An error occured while loading record. Refresh and try again.</p>;
+  }
 
   return (
     <div className="w-full overflow-scroll md:overflow-auto">
