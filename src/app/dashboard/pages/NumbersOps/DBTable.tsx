@@ -11,6 +11,8 @@ export default function NumberOpsTable() {
 
   const { navigateToAssignNumber } = useNumberOps();
 
+  console.log({ new_sims });
+
   return (
     <div className="w-full overflow-scroll md:overflow-auto">
       <Table>
@@ -38,7 +40,7 @@ export default function NumberOpsTable() {
                   <td>{sim?.emailAddress}</td>
                   <td>{sim?.networkDescription}</td>
                   <td
-                    onClick={() => navigateToAssignNumber({sim})}
+                    onClick={() => navigateToAssignNumber({ sim })}
                     className="text-blue cursor-pointer"
                   >
                     Assign SIM

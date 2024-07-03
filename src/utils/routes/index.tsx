@@ -178,6 +178,7 @@ const router = createBrowserRouter([
                     path: ":id/admin",
                     element: <AccessControlView />,
                   },
+                  
                 ],
               },
               {

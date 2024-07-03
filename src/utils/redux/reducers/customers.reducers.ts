@@ -11,6 +11,10 @@ export const customersApi = createApi({
       query: () => ({
         url: "Admin/users",
         method: "GET",
+        params: {
+          page: 1,
+          pageSize: 10000,
+        }
       }),
     }),
   }),

@@ -4,15 +4,16 @@ import TableStatus from "@/app/sharedcomponents/tableActions";
 import PageLoader from "@/app/sharedcomponents/pageLoader";
 
 export default function DBTable() {
-  const { data, isLoading: loading } = useGetCustomersQuery({
+  const { data: customers, isLoading: loading } = useGetCustomersQuery({
     pageSize: 10,
     page: 1,
     fromDate: "2022-01-01",
     toDate: "2025-12-31",
   });
 
+  console.log("main_data", { customers });
   if (loading) {
-    return <PageLoader loading={loading}/>;
+    return <PageLoader loading={loading} />;
   }
   return (
     <div className="w-full overflow-scroll md:overflow-auto">
@@ -29,9 +30,8 @@ export default function DBTable() {
           </tr>
         </thead>
         <tbody>
-          {data?.result?.results?.map(
+          {customers?.result?.results?.map(
             (data: Record<string, string | boolean>, index: number) => {
-              console.log({ data });
               const {
                 firstName,
                 lastName,
