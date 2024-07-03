@@ -4,7 +4,7 @@ import { CgChevronDown } from "react-icons/cg";
 import { useState } from "react";
 import ClickAwayListener from "./sidebarClickOut";
 
-function SidebarNavs({ name, icon, link, children }: TNavLinks) {
+function SidebarNavs({ name, icon, link, children, end }: TNavLinks) {
   // const match = useMatch(`/${link}` || "");
   const matches = useMatches();
   const data = matches[3]?.pathname?.split("/")?.[2];
@@ -82,7 +82,7 @@ function SidebarNavs({ name, icon, link, children }: TNavLinks) {
     <div>
       <NavLink
         to={link ? `/${link}` : "/"}
-        end={true}
+        end={end}
         className={({ isActive }) =>
           isActive
             ? "group px-4 py-1 text-[1rem] flex justify-between items-center bg-white hover:cursor-pointer rounded-[6px]"

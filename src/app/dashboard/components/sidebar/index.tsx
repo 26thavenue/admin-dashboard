@@ -12,6 +12,7 @@ export type TNavLinks = {
   type?: SidebarContentTypes;
   link?: string;
   children?: TNavLinks[];
+  end: boolean;
 };
 
 function DBSidebar() {

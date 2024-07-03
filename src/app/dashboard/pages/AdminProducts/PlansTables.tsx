@@ -54,6 +54,7 @@ export default function PlansTable() {
   }
   return (
     <DBHomeTemplate
+      backUrl="/dashboard/products"
       name={`Plans for ${params?.name || "Your Plans"}`}
       supportText={`Manage Plans for ${params?.name}`}
     >
