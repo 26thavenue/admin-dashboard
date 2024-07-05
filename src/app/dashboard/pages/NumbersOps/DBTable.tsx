@@ -13,6 +13,7 @@ export default function NumberOpsTable() {
     data: new_sims,
     isLoading: loading,
     error,
+    refetch: refetchRecords,
   } = useFetchPendingSimsQuery({
     page: currentPage,
     pageSize: pageSize, // Assuming you want 15 items per page
@@ -33,7 +34,10 @@ export default function NumberOpsTable() {
 
   if (error) {
     return (
-      <p>An error occurred while loading record. Refresh and try again.</p>
+      <p>
+        An error occurred while loading record.{" "}
+        <span className="cursor-pointer text-blue" onClick={() => refetchRecords()}>Refresh</span> and try again.
+      </p>
     );
   }
 
