@@ -33,9 +33,10 @@ export const productApi = createApi({
       }),
     }),
     getProducts: builder.query({
-      query: () => ({
+      query: (params) => ({
         url: "products",
         method: "GET",
+        params: params
       }),
     }),
     getProductsPlans: builder.query({

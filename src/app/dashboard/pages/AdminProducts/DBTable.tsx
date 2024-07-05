@@ -4,6 +4,7 @@ import { CurrencyFormatter } from "@/utils/resources/general";
 import ClipLoader from "react-spinners/ClipLoader";
 import TableStatus from "@/app/sharedcomponents/tableActions";
 import { useNavigate } from "react-router-dom";
+import usePagination from "@/app/sharedcomponents/pagination";
 
 interface MobilePlan {
   data: string;
@@ -24,8 +25,12 @@ interface MobilePlan {
 }
 
 export default function DBTable() {
-  const { data, isLoading: loading } = useGetProductsQuery({});
+
   const navigate = useNavigate();
+  const { Pagination, currentPage } = usePagination({ totalPages: 20 });
+  const { data, isLoading: loading } = useGetProductsQuery({currentPage});
+
+
 
   if (loading) {
     return (
@@ -100,6 +105,7 @@ export default function DBTable() {
           ))}
         </tbody>
       </Table>
+      <Pagination />
     </div>
   );
 }
