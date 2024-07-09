@@ -36,7 +36,13 @@ export default function NumberOpsTable() {
     return (
       <p>
         An error occurred while loading record.{" "}
-        <span className="cursor-pointer text-blue" onClick={() => refetchRecords()}>Refresh</span> and try again.
+        <span
+          className="cursor-pointer text-blue"
+          onClick={() => refetchRecords()}
+        >
+          Refresh
+        </span>{" "}
+        and try again.
       </p>
     );
   }
@@ -62,6 +68,7 @@ export default function NumberOpsTable() {
               },
               index: number
             ) => {
+              console.log({ sim });
               return (
                 <tr key={index}>
                   <td>{tableNumbering(index)}</td>

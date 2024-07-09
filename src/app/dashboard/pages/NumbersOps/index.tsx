@@ -6,7 +6,8 @@ export type TNumberOperations = {
   simNumber: string;
   emailAddress: string;
   network: number;
-  mobileNumber?: string
+  mobileNumber?: string;
+  id: number;
 };
 
 export type TNumbDetails = {

@@ -19,6 +19,8 @@ export type TNumberOperations = {
   simNumber: string;
   emailAddress: string;
   network: number;
+  id: number;
+  simId: number;
 };
 
 export type TNumbDetails = {
@@ -86,6 +88,7 @@ function AssignNumber() {
   useBlockReload();
   const [createSimCard, { isLoading: loading }] = useCreateSimMutation();
   const num_ops = useSelector(operationsSelector);
+  console.log({ num_ops });
   const params = useParams();
   const formMethods = useForm<TNumberOperations>({
     mode: "all",
@@ -93,6 +96,7 @@ function AssignNumber() {
       ...num_ops?.number_ops,
       ...params,
       simNumber: num_ops?.number_ops.mobileNumber,
+      simId: num_ops?.number_ops?.id,
     },
   });
   const {

@@ -2,7 +2,8 @@ export interface NumberOps {
   mobileNumber: string | undefined;
   isOpen: boolean;
   emailAddress: string;
-  network: number
+  network: number;
+  id: number;
 }
 
 export interface Operations {
