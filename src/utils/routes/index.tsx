@@ -191,7 +191,7 @@ const router = createBrowserRouter([
                     element: <AccessControlView />,
                   },
                   {
-                    path: ":networkDescription/:network/:emailAddress/:random/assign",
+                    path: ":id/assign",
                     element: <AssignNumberOperations />,
                   },
                 ],

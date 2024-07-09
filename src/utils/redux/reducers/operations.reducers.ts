@@ -6,14 +6,8 @@ import { TNumberOperations } from "@/app/dashboard/pages/NumbersOps";
 export const operationsApi = createApi({
   baseQuery: api,
   reducerPath: "operationsApi",
+  tagTypes: ["CreateSim", "FetchSingleSimData"],
   endpoints: (builder) => ({
-    createSim: builder.mutation({
-      query: (payload: TNumberOperations) => ({
-        url: "sims",
-        method: "POST",
-        body: payload,
-      }),
-    }),
     fetchPendingSims: builder.query({
       query: (params) => ({
         url: "Admin/sims",
@@ -21,7 +15,26 @@ export const operationsApi = createApi({
         params: params,
       }),
     }),
+    fetchPendingSimsDetails: builder.query({
+      query: (params) => ({
+        url: `Admin/sims/${params.id}`,
+        method: "GET",
+      }),
+      providesTags: ["FetchSingleSimData"],
+    }),
+    createSim: builder.mutation({
+      query: (payload: TNumberOperations) => ({
+        url: "sims",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["FetchSingleSimData"],
+    }),
   }),
 });
 
-export const { useCreateSimMutation, useFetchPendingSimsQuery } = operationsApi;
+export const {
+  useCreateSimMutation,
+  useFetchPendingSimsQuery,
+  useFetchPendingSimsDetailsQuery,
+} = operationsApi;

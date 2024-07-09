@@ -1,8 +1,8 @@
 import Table from "../../components/table";
 import { useFetchPendingSimsQuery } from "@/utils/redux/reducers/operations.reducers";
-import useNumberOps from "./useNumberOps";
 import usePagination from "@/app/sharedcomponents/pagination";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function NumberOpsTable() {
   const [totalPages, setTotalPages] = useState(1);
@@ -20,7 +20,7 @@ export default function NumberOpsTable() {
     simStatus: -1,
   });
 
-  const { navigateToAssignNumber } = useNumberOps();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (new_sims?.result?.totalNumberOfPages) {
@@ -65,6 +65,7 @@ export default function NumberOpsTable() {
                 emailAddress: string;
                 networkDescription: string;
                 network: number;
+                id: number
               },
               index: number
             ) => {
@@ -75,7 +76,7 @@ export default function NumberOpsTable() {
                   <td>{sim?.emailAddress}</td>
                   <td>{sim?.networkDescription}</td>
                   <td
-                    onClick={() => navigateToAssignNumber({ sim })}
+                    onClick={() => navigate(`${sim.id}/assign`)}
                     className="text-blue cursor-pointer"
                   >
                     Assign SIM

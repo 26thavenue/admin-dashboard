@@ -6,10 +6,13 @@ import {
 } from "@/app/sharedcomponents/form";
 import DBHomeTemplate from "../template";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { useCreateSimMutation } from "@/utils/redux/reducers/operations.reducers";
+import {
+  useCreateSimMutation,
+  useFetchPendingSimsDetailsQuery,
+} from "@/utils/redux/reducers/operations.reducers";
 import { useSelector } from "react-redux";
 import { operationsSelector } from "@/utils/redux/slices/operation.slice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useBlockReload from "@/utils/hooks/useBlockReload";
 import { Notify } from "@/utils/resources/toast";
 import { Regex } from "@/utils/regex";
@@ -30,6 +33,37 @@ export type TNumbDetails = {
 
 function AssignNumberOperations() {
   const params = useParams();
+  const {
+    data,
+    isLoading: loading,
+    error,
+    refetch: refetchRecords,
+  } = useFetchPendingSimsDetailsQuery({
+    id: params.id,
+  });
+
+  const user = data?.result?.results[0];
+
+  console.log({ data });
+
+  if (loading) {
+    return <p>Loading Records...</p>;
+  }
+
+  if (error) {
+    return (
+      <p>
+        An error occurred while loading record.{" "}
+        <span
+          className="cursor-pointer text-blue"
+          onClick={() => refetchRecords()}
+        >
+          Refresh
+        </span>{" "}
+        and try again.
+      </p>
+    );
+  }
 
   return (
     <DBHomeTemplate
@@ -46,37 +80,45 @@ function AssignNumberOperations() {
             <div className="flex flex-row ">
               <div className=" w-[100%]">
                 <small>First Name</small>
-                <p>John</p>
+                <p>{user?.firstName || "Jane"}</p>
               </div>
               <div className="w-[100%]">
                 <small>Last Name</small>
-                <p>Doe</p>
+                <p>{user?.lastName || "Doe"}</p>
               </div>
             </div>
             <div>
               <small>Email Address</small>
-              <p>{params?.emailAddress}</p>
+              <p>{user?.emailAddress}</p>
             </div>
-            <div>
-              <small>Billing Address</small>
-              <p>123 Main St, Anytown USA</p>
-              <p>123 Main St, Anytown USA</p>
-              <p>123 Main St, Anytown USA</p>
-            </div>
-            <div>
-              <small>Shipping Address</small>
-              <p>123 Main St, Anytown USA</p>
-              <p>123 Main St, Anytown USA</p>
-              <p>123 Main St, Anytown USA</p>
-            </div>
-            <br />
-            <small>First Name has X SIMs with Talk4 Mobile.</small>
+            {user?.addresses?.map(
+              (address: Record<string, string | boolean>, index: number) => {
+                return (
+                  <div key={index}>
+                    <small>
+                      {address?.isBilling === true
+                        ? "Billing Address"
+                        : "Shipping Address"}
+                    </small>
+                    <p>{address?.line1}</p>
+                    <p>{address?.line2}</p>
+                    <p>
+                      {address?.city}, {address?.state}
+                    </p>
+                    <p>{address?.country}</p>
+                    <p>{address?.postalCode}</p>
+                  </div>
+                );
+              }
+            )}
           </div>
         </div>
-        <div className="bg-white p-6 rounded-[12px] w-[100%]">
-          <h4 className="font-medium">Assign Number to SIM Card</h4>
-          <AssignNumber />
-        </div>
+        {user?.simStatus === -1 && (
+          <div className="bg-white p-6 rounded-[12px] w-[100%]">
+            <h4 className="font-medium">Assign Number to SIM Card</h4>
+            {user && <AssignNumber user={user} />}
+          </div>
+        )}
       </div>
     </DBHomeTemplate>
   );
@@ -84,19 +126,22 @@ function AssignNumberOperations() {
 
 export default AssignNumberOperations;
 
-function AssignNumber() {
+function AssignNumber({
+  user,
+}: {
+  user: Record<string, string | boolean | number>;
+}) {
   useBlockReload();
   const [createSimCard, { isLoading: loading }] = useCreateSimMutation();
   const num_ops = useSelector(operationsSelector);
-  console.log({ num_ops });
+  const navigate = useNavigate();
+  console.log({ num_ops, user });
   const params = useParams();
   const formMethods = useForm<TNumberOperations>({
     mode: "all",
     defaultValues: {
-      ...num_ops?.number_ops,
-      ...params,
-      simNumber: num_ops?.number_ops.mobileNumber,
-      simId: num_ops?.number_ops?.id,
+      emailAddress: user?.emailAddress as string,
+      network: user?.network as number,
     },
   });
   const {
@@ -109,19 +154,17 @@ function AssignNumber() {
     const response = await createSimCard({
       ...data,
       network: Number(data?.network),
+      simId: params?.id,
     });
 
     if ("data" in response) {
       if ("message" in response.data) {
-        Notify().showSuccessNotification(response.data.message);
+        Notify().showSuccessNotification(
+          `${response.data.message}. An email notification which contains the SIM details has been sent to ${user.emailAddress}.`
+        );
+        navigate("/dashboard/numbers_ops");
         reset();
       }
-    }
-
-    if ("error" in response) {
-      Notify().showErrorNotification(
-        "An error occured. Contact your system Administrator or Developer."
-      );
     }
   };
 
