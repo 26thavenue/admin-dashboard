@@ -6,7 +6,7 @@ import { TNumberOperations } from "@/app/dashboard/pages/NumbersOps";
 export const operationsApi = createApi({
   baseQuery: api,
   reducerPath: "operationsApi",
-  tagTypes: ["CreateSim", "FetchSingleSimData"],
+  tagTypes: ["CreateSim", "FetchSingleSimData", "FetchAllSimData"],
   endpoints: (builder) => ({
     fetchPendingSims: builder.query({
       query: (params) => ({
@@ -14,6 +14,7 @@ export const operationsApi = createApi({
         method: "GET",
         params: params,
       }),
+      providesTags: ["FetchAllSimData"],
     }),
     fetchPendingSimsDetails: builder.query({
       query: (params) => ({
@@ -28,7 +29,7 @@ export const operationsApi = createApi({
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["FetchSingleSimData"],
+      invalidatesTags: ["FetchSingleSimData", "FetchAllSimData"],
     }),
   }),
 });

@@ -9,6 +9,7 @@ export default function NumberOpsTable() {
   const { Pagination, currentPage, pageSize, tableNumbering } = usePagination({
     totalPages,
   });
+  const [selectStatus, setSelectStatus] = useState<number | string>(-1);
   const {
     data: new_sims,
     isLoading: loading,
@@ -16,8 +17,8 @@ export default function NumberOpsTable() {
     refetch: refetchRecords,
   } = useFetchPendingSimsQuery({
     page: currentPage,
-    pageSize: pageSize, // Assuming you want 15 items per page
-    simStatus: -1,
+    pageSize: pageSize,
+    simStatus: Number(selectStatus),
   });
 
   const navigate = useNavigate();
@@ -27,6 +28,20 @@ export default function NumberOpsTable() {
       setTotalPages(new_sims.result.totalNumberOfPages);
     }
   }, [new_sims]);
+
+  const SelectSIMStatus = () => {
+    return (
+      <select
+        value={selectStatus}
+        className="px-4 py-2 rounded border border-gray-300 text-base mb-4"
+        onChange={(e) => setSelectStatus(e.target.value as string)}
+      >
+        <option value={-1}>Not Allocated</option>
+        <option value={0}>Pending Activation</option>
+        <option value={1}>Activated</option>
+      </select>
+    );
+  };
 
   if (loading) {
     return <p>Loading Records...</p>;
@@ -49,12 +64,14 @@ export default function NumberOpsTable() {
 
   return (
     <div className="w-full overflow-scroll md:overflow-auto">
+      <SelectSIMStatus />
       <Table>
         <thead>
           <tr>
             <th>#</th>
             <th>Email</th>
             <th>Network</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -65,7 +82,8 @@ export default function NumberOpsTable() {
                 emailAddress: string;
                 networkDescription: string;
                 network: number;
-                id: number
+                id: number;
+                simStatusDescription: string;
               },
               index: number
             ) => {
@@ -75,12 +93,22 @@ export default function NumberOpsTable() {
                   <td>{tableNumbering(index)}</td>
                   <td>{sim?.emailAddress}</td>
                   <td>{sim?.networkDescription}</td>
-                  <td
-                    onClick={() => navigate(`${sim.id}/assign`)}
-                    className="text-blue cursor-pointer"
-                  >
-                    Assign SIM
-                  </td>
+                  <td>{sim?.simStatusDescription}</td>
+                  {selectStatus === -1 ? (
+                    <td
+                      onClick={() => navigate(`${sim.id}/assign`)}
+                      className="text-blue cursor-pointer"
+                    >
+                      Assign SIM
+                    </td>
+                  ) : (
+                    <td
+                      onClick={() => navigate(`${sim.id}/assign`)}
+                      className="text-blue cursor-pointer"
+                    >
+                      View Customer
+                    </td>
+                  )}
                 </tr>
               );
             }
