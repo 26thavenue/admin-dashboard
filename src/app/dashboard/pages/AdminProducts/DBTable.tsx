@@ -5,6 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import TableStatus from "@/app/sharedcomponents/tableActions";
 import { useNavigate } from "react-router-dom";
 import usePagination from "@/app/sharedcomponents/pagination";
+import { useEffect, useState } from "react";
 
 interface MobilePlan {
   data: string;
@@ -27,9 +28,18 @@ interface MobilePlan {
 export default function DBTable() {
 
   const navigate = useNavigate();
-  const { Pagination, currentPage } = usePagination({ totalPages: 20 });
-  const { data, isLoading: loading } = useGetProductsQuery({currentPage});
+  const [totalPages, setTotalPages] = useState(1);
+  const { Pagination, currentPage, pageSize, tableNumbering } = usePagination({
+    totalPages,
+  });
+  const { data: all_products, isLoading: loading } = useGetProductsQuery({currentPage, pageSize});
 
+
+    useEffect(() => {
+      if (all_products?.result?.totalNumberOfPages) {
+        setTotalPages(all_products.result.totalNumberOfPages);
+      }
+    }, [all_products]);
 
 
   if (loading) {
@@ -66,9 +76,9 @@ export default function DBTable() {
           </tr>
         </thead>
         <tbody>
-          {data?.result?.map((plan: MobilePlan, index: number) => (
+          {all_products?.result?.map((plan: MobilePlan, index: number) => (
             <tr>
-              <td>{index + 1}</td>
+              <td>{tableNumbering(index)}</td>
               <td>{plan?.name}</td>
               <td>{plan?.networkDescription}</td>
               <td>{CurrencyFormatter(plan?.defaultPrice)}</td>

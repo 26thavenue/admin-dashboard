@@ -13,6 +13,7 @@ export default function NumberOpsTable() {
   const {
     data: new_sims,
     isLoading: loading,
+    isFetching: fetching,
     error,
     refetch: refetchRecords,
   } = useFetchPendingSimsQuery({
@@ -65,6 +66,7 @@ export default function NumberOpsTable() {
   return (
     <div className="w-full overflow-scroll md:overflow-auto">
       <SelectSIMStatus />
+      {fetching && <p>Updating Records...</p>}
       <Table>
         <thead>
           <tr>
