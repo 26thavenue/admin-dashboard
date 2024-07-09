@@ -225,7 +225,7 @@ const router = createBrowserRouter([
                 children: [
                   { index: true, element: <Customer /> },
                   {
-                    path: ":id/admin",
+                    path: ":mobileNumber/admin",
                     element: <CustomerView />,
                   },
                 ],

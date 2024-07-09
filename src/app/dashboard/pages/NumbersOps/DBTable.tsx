@@ -86,6 +86,7 @@ export default function NumberOpsTable() {
                 network: number;
                 id: number;
                 simStatusDescription: string;
+                mobileNumber: string
               },
               index: number
             ) => {
@@ -98,14 +99,16 @@ export default function NumberOpsTable() {
                   <td>{sim?.simStatusDescription}</td>
                   {selectStatus === -1 ? (
                     <td
-                      onClick={() => navigate(`${sim.id}/assign`)}
+                      onClick={() => navigate(`${sim?.id}/assign`)}
                       className="text-blue cursor-pointer"
                     >
                       Assign SIM
                     </td>
                   ) : (
                     <td
-                      onClick={() => navigate(`${sim.id}/assign`)}
+                      onClick={() =>
+                        navigate(`../customers/${sim?.mobileNumber}/admin`)
+                      }
                       className="text-blue cursor-pointer"
                     >
                       View Customer
