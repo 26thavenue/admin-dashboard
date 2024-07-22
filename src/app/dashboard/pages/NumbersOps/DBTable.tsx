@@ -73,6 +73,9 @@ export default function NumberOpsTable() {
             <th>#</th>
             <th>Email</th>
             <th>Network</th>
+            {new_sims?.result?.results?.[0]?.simStatus !== -1 && (
+              <th>Phone Number</th>
+            )}
             <th>Status</th>
             <th>Actions</th>
           </tr>
@@ -86,7 +89,8 @@ export default function NumberOpsTable() {
                 network: number;
                 id: number;
                 simStatusDescription: string;
-                mobileNumber: string
+                mobileNumber: string;
+                simStatus: number;
               },
               index: number
             ) => {
@@ -96,8 +100,9 @@ export default function NumberOpsTable() {
                   <td>{tableNumbering(index)}</td>
                   <td>{sim?.emailAddress}</td>
                   <td>{sim?.networkDescription}</td>
+                  {sim.simStatus !== -1 && <td>{sim?.mobileNumber}</td>}
                   <td>{sim?.simStatusDescription}</td>
-                  {selectStatus === -1 ? (
+                  {sim?.simStatus === -1 ? (
                     <td
                       onClick={() => navigate(`${sim?.id}/assign`)}
                       className="text-blue cursor-pointer"
