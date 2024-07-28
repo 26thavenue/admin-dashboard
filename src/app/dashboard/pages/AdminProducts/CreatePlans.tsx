@@ -28,6 +28,8 @@ interface FormData {
   wtsCompatible: string;
   tftpCompatible: string;
   isCustom: string;
+  dataAmount: string;
+  voiceAndSmsAmount: string
 }
 
 function AdminCreatePlans() {
@@ -51,6 +53,8 @@ function AdminCreatePlans() {
       interval: Number(data?.interval),
       isCustom: Boolean(data?.isCustom),
       product_sku: params?.id,
+      hasData: data?.dataAmount ? "data" : "",
+      hasVoiceSms: data?.voiceAndSmsAmount ? "voiceandsms" : ""
     };
 
     const response = await createPlan(payload);
@@ -99,13 +103,7 @@ function AdminCreatePlans() {
                   <option value={2}>Vodafone</option>
                   <option value={3}>EE</option>
                 </FormSelect> */}
-                <FormInput
-                  name="sellPrice"
-                  title="Sell Price"
-                  type="number"
-                  step="0.01"
-                  min={0}
-                />
+
                 <FormInput name="sku" title="SKU" type="text" />
                 <FormSelect name="interval" title="Interval" type="text">
                   <option value={1}>Monthly</option>
@@ -114,8 +112,55 @@ function AdminCreatePlans() {
               </div>
             </div>
             <p className="font-medium">Product Features</p>
-            {/* <div>
+            <div>
               <div className="grid grid-cols-3 gap-3 gap-y-6 mb-3">
+                <FormInput
+                  name="sellPrice"
+                  title="Sell Price"
+                  type="number"
+                  step="0.01"
+                  min={0}
+                />
+                <FormInput
+                  name="dataAmount"
+                  title="Data Amount"
+                  type="text"
+                  moreRegister={{
+                    pattern: {
+                      value: /\bUnlimited\b|\b\d+\b/,
+                      message:
+                        "Enter 'Unlimited' for unlimited data plan, or whole numbers for Gigabyte",
+                    },
+                  }}
+                  // step="0.01"
+                  // min={0}
+                />
+                <FormInput
+                  name="voiceAndSmsAmount"
+                  title="Voice and SMS Amount"
+                  type="text"
+                  moreRegister={{
+                    pattern: {
+                      value: /\bUnlimited\b|\b\d+\b/,
+                      message:
+                        "Enter 'Unlimited' for unlimited Voice and SMS plan, or whole numbers for minutes",
+                    },
+                  }}
+                />
+                {/* <FormInput
+                  name="sellPrice"
+                  title="Sell Price"
+                  type="number"
+                  step="0.01"
+                  // min={0}
+                />{" "} */}
+                {/* <FormInput
+                  name="sellPrice"
+                  title="Sell Price"
+                  type="number"
+                  step="0.01"
+                  min={0}
+                />
                 <FormSelect
                   name="tarrifType"
                   title="Tariff Type"
@@ -166,9 +211,9 @@ function AdminCreatePlans() {
                 <FormSelect name="isCustom" title="Is Custom" type="text">
                   <option value={"true"}>True</option>
                   <option value={"false"}>False</option>
-                </FormSelect>
+                </FormSelect> */}
               </div>
-            </div> */}
+            </div>
             <div className="flex gap-4 justify-end">
               <Button variant={"secondary"} disabled={!isValid}>
                 Cancel
