@@ -49,7 +49,7 @@ function AdminCreatePlans() {
       ...data,
       network: Number(data?.network),
       tarrifType: Number(data?.tarrifType),
-      sellPrice: Number(data?.sellPrice),
+      price: Number(data?.sellPrice),
       interval: Number(data?.interval),
       isCustom: Boolean(data?.isCustom),
       product_sku: params?.id,

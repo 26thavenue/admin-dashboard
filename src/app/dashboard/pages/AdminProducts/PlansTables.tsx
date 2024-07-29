@@ -22,6 +22,7 @@ interface MobilePlan {
   ukVoiceAndSms: string;
   ukeuMinutesAndSms: string;
   wtsCompatible: string;
+  price: number;
 }
 
 export default function PlansTable() {
@@ -29,8 +30,9 @@ export default function PlansTable() {
   const { data, isLoading: loading } = useGetProductsPlansQuery({
     plan_sku: "",
   });
-  // const navigate = useNavigate();
-  //
+
+  
+  
   const filteredPlans = () => {
     const plans = data?.result?.filter(
       (plan: MobilePlan) => params?.id === plan?.productSku
@@ -52,6 +54,7 @@ export default function PlansTable() {
       </div>
     );
   }
+
   return (
     <DBHomeTemplate
       backUrl="/dashboard/products"
@@ -85,7 +88,7 @@ export default function PlansTable() {
                   <td>{index + 1}</td>
                   <td>{plan?.name}</td>
                   <td>{plan?.networkDescription}</td>
-                  <td>{CurrencyFormatter(plan?.defaultPrice)}</td>
+                  <td>{CurrencyFormatter(plan?.price)}</td>
                   <td>{plan?.productSku}</td>
                   <td>{plan?.planSku}</td>
                   <td>{plan?.tarrifTypeDescription}</td>
