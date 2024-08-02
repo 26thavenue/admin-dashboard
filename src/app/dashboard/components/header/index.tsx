@@ -1,4 +1,4 @@
-import { Logos } from "../../../../assets/logo";
+
 import Avatar from "../../../../assets/images/placeholder.png";
 import { useSidebar } from "../../../../utils/contexts/app/useSidebar";
 import Hamburger from "hamburger-react";
@@ -12,8 +12,8 @@ function DBHeader() {
         <HandleDisplaySidebar />
         <img
           className=" w-[135px] md:w-[135px] block mx-auto my-0"
-          src={Logos.Everyone.Pink_Mobile.img}
-          alt={Logos.Everyone.Pink_Mobile.alt}
+          src=""
+          alt="logo"
         />
       </div>
 

@@ -1,6 +1,5 @@
 // import { Link } from "react-router-dom";
 import "@/App.css";
-// import { Logos } from "@/assets/logo/index";
 // import { URLs } from "@/utils/enums";
 import Footer from "@/landing/components/footer";
 import Header from "@/landing/components/header";
@@ -15,8 +14,7 @@ function SiteLayout({ children }: { children: React.ReactNode }) {
       <Header />
       {/* <div className="grid place-items-center gap-4 p-10 text-center">
         <img
-          src={Logos.Everyone.Pink_Mobile.img}
-          alt={Logos.Everyone.Pink_Mobile.alt}
+       
         />
         <p className="text-brand">Welcome To The Talk4 Telcomms Project</p>
         <h1 className="text-3xl">Project Under Development</h1>

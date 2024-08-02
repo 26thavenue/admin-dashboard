@@ -18,7 +18,7 @@ function HelpForm() {
       <div className="flex bg-white -mt-32 lg:max-w-6xl w-[100%] min-h-[400px] shadow-xl mx-auto my-12 rounded-2xl flex-auto overflow-hidden">
         <div className="w-[auto] hidden sm:hidden lg:block  p-0 relative">
           <img src={Images.BusinessMan} alt="Businessman - Contact Us" />
-          {/* <img src={Logos.Everyone.Mobile.img} alt={Logos.Everyone.Mobile.alt} />
+          {/* 
 
         <div className="w-[95%]">
           <h3 className="mt-4  text-[2rem] text-white font-extrabold">

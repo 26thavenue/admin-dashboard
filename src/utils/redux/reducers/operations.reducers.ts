@@ -31,6 +31,7 @@ export const operationsApi = createApi({
       }),
       invalidatesTags: ["FetchSingleSimData", "FetchAllSimData"],
     }),
+    
   }),
 });
 

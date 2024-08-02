@@ -4,7 +4,6 @@ import {
   BsLinkedin,
   BsInstagram,
 } from "react-icons/bs";
-import { Logos } from "../../../assets/logo";
 
 function Footer() {
   const date = new Date();
@@ -14,8 +13,8 @@ function Footer() {
         <div className="min-w-full mb-10 grid grid-cols-1 lg:grid-cols-6 gap-8 py-10">
           <div className="col-span-2 text-center lg:text-left">
             <img
-              src={Logos.Everyone.Mobile.img}
-              alt={Logos.Everyone.Mobile.alt}
+              src={""}
+              alt={"logo"}
               className="mb-4 block my-0 mx-auto lg:mx-[unset]"
             />
             <p className="">

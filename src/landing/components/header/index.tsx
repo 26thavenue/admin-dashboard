@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { Logos } from "../../../assets/logo";
 import AuthButtonGroups from "./buttonGroups";
 import HeaderNavs from "./headerNavs";
 
@@ -13,8 +12,8 @@ function Header() {
             <img
               onClick={() => navigate("/")}
               className="w-[80%] cursor-pointer"
-              src={Logos.Everyone.Mobile.img}
-              alt={Logos.Everyone.Mobile.alt}
+              src={""}
+              alt={"logo"}
             />
           </div>
           <nav className="hidden lg:block">

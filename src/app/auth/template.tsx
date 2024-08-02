@@ -1,4 +1,3 @@
-import { Logos } from "../../assets/logo";
 import { Images } from "../../assets/images";
 
 type TAuthTemplate = {
@@ -17,8 +16,8 @@ function AuthTemplate({ children, title, altText }: TAuthTemplate) {
         <div className="">
           <img
             className="mx-auto"
-            src={Logos.Everyone.Pink_Mobile.img}
-            alt={Logos.Everyone.Pink_Mobile.alt}
+            src={""}
+            alt={"Logo"}
           />
           {title && (
             <h3 className="mt-4 text-center text-[1.95rem] text-black font-bold relative">

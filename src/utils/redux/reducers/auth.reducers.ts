@@ -6,6 +6,13 @@ export const authApi = createApi({
   reducerPath: "authApi",
   tagTypes: ["Auth"],
   endpoints: (builder) => ({
+    adminLogin: builder.mutation({
+      query: (payload: { email: string; password: string }) => ({
+        url: "https://devapi.japa.run/api/v1/Admin/login",
+        method: "POST",
+        body: payload,
+      }),
+    }),
     login: builder.mutation({
       query: (payload: { email: string; password: string }) => ({
         url: "/auth/login",

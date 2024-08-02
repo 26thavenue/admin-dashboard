@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import { Logos } from "../../../../assets/logo";
 import { NavLinks } from "./nav_links";
 import SidebarNavs from "./sidebarNavs";
 // import Avatar from "../../../../assets/images/placeholder.png";
@@ -27,8 +26,8 @@ function DBSidebar() {
     >
       <img
         className=" w-[50%] md:w-[70%] block mx-auto my-3"
-        src={Logos.Everyone.Mobile.img}
-        alt={Logos.Everyone.Mobile.alt}
+        src={""}
+        alt={"logo"}
       />
       <div className="flex flex-col mt-2 gap-4 py-4 px-2">
         {NavLinks(SidebarContentTypes.Main).map((link: TNavLinks) => {
