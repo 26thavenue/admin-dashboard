@@ -7,35 +7,49 @@ function DBHome() {
   return (
     <DBHomeTemplate
       name="Welcome, Super Admin"
-      supportText="Welcome Back to Talk Watch Tower (Admin App)"
+      supportText="A Snapshot Of Platform Analytics "
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 rounded-[8px] bg-white shadow-md">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 rounded-[8px] bg-white shadow-md">
         <Stats
-          plan={"50,000"}
+          plan={"6000"}
           amount={"300"}
           supportText="5000 more from yesterday"
-          feature={"Registered SIMs (Today)"}
+          feature={"Total Users"}
           icon={DBImages.Calling}
         />
         <Stats
-          plan={"500,000"}
+          plan={"5200"}
           amount={"300"}
           supportText="5000 more from last month"
-          feature={"Registered SIMs (Month)"}
+          feature={"Active Users"}
           icon={DBImages.Calling}
         />
         <Stats
           plan={"300"}
           amount={"300"}
-          supportText="2 more than yesterday"
-          feature="Resolved Complains (Today)"
+          // supportText="2 more than yesterday"
+          feature="InActive Users"
           icon={DBImages.Case}
         />
         <Stats
-          plan={"Beta Network Plan"}
+          plan={"200"}
           amount={"300"}
-          supportText="Better than PAYG"
-          feature="Most Sold Product (Today)"
+          // supportText="Better than PAYG"
+          feature="Total Communities"
+          icon={DBImages.Network}
+        />
+        <Stats
+          plan={"400"}
+          amount={"300"}
+          // supportText="Better than PAYG"
+          feature="Total Gists"
+          icon={DBImages.Network}
+        />
+        <Stats
+          plan={"6600"}
+          amount={"300"}
+          // supportText="Better than PAYG"
+          feature="Total Events"
           icon={DBImages.Network}
         />
       </div>

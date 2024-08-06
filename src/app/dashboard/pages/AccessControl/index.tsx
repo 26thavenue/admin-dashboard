@@ -8,11 +8,12 @@ import TopUpModal from "../TopUp/TopUpModal";
 function AccessControl() {
   return (
     <DBHomeTemplate
-      name="Access Control"
-      supportText="Manage how staff manage this watchtower"
+      name="Manage Users"
+      supportText=""
     >
       <div>
         <AddStaffAdmin />
+      
       </div>
       <div className="bg-white p-6 rounded-[12px]">
         <DBTable />
@@ -34,13 +35,13 @@ function AddStaffAdmin() {
   } = formMethods;
   return (
     <>
-      <Button onClick={() => setIsOpen(!isOpen)} className="ml-auto block">
-        Add Staff Admin
+      <Button onClick={() => setIsOpen(!isOpen)} className="ml-auto block bg-white text-black">
+        Actions
       </Button>
       <TopUpModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        header={"Add Staff Admin"}
+        header={"Perform Actions"}
         description={"Fill the fields below to Get Started"}
       >
         <FormProvider {...formMethods}>

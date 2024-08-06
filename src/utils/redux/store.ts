@@ -1,34 +1,22 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore,combineReducers } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
-import {
-  operationsApi,
-  productApi,
-  customersApi,
-  financesApi,
-  authApi,
-  profileApi,
-} from "./reducers";
-import { OperationsSlice } from "./slices";
+import {newApi} from "./reducers";
+import {rootSlice} from './slices/rootSlice';
+
+const rootReducer = combineReducers({
+  ...rootSlice,
+     [newApi.reducerPath]: newApi.reducer,
+});
 
 export const store = configureStore({
-  reducer: {
-    operations: OperationsSlice,
-    [authApi.reducerPath]: authApi.reducer,
-    [profileApi.reducerPath]: profileApi.reducer,
-    [productApi.reducerPath]: productApi.reducer,
-    [operationsApi.reducerPath]: operationsApi.reducer,
-    [customersApi.reducerPath]: customersApi.reducer,
-    [financesApi.reducerPath]: financesApi.reducer,
-  },
+  reducer: rootReducer,
+   
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
-      authApi.middleware,
-      profileApi.middleware,
-      productApi.middleware,
-      operationsApi.middleware,
-      customersApi.middleware,
-      financesApi.middleware,
+      newApi.middleware
     ]),
 });
 
 setupListeners(store.dispatch);
+
+export type RootState = ReturnType<typeof store.getState>;

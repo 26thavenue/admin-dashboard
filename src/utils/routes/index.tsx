@@ -5,37 +5,20 @@ import Dashboard from "../../app/dashboard/index";
 import {
   DBHome,
   Plans,
-  Rates,
-  NationalRates,
+  
   History,
   Porting,
   Settings,
 } from "../../app/dashboard/pages";
 import { includeDashboardUrl } from "../resources/includeDashboardUrl";
 import App from "../../App";
-import OrderPlan from "@/site/OrderPlan";
-import WhyTalk4 from "@/site/WhyTalk4";
-import LandingPagePlan from "@/site/Plans";
-import WhyUs from "@/site/WhyTalk4/Why";
-import Transfer from "@/site/WhyTalk4/Transfer";
-import Payga from "@/site/Plans/PAYGA";
-import TalkLonger from "@/site/Plans/TalkLonger";
-import DataOnly from "@/site/Plans/DataOnly";
-import LandingPageRates from "@/site/Rates";
-import InternationalCallingRates from "@/site/Rates/InternationalCallingRates";
-import RoamingRates from "@/site/Rates/RoamingRates";
-import Help from "@/site/Help";
-import OrderPreview from "@/site/OrderPlan/Preview";
 import AccessControlView from "@/app/dashboard/pages/AccessControl/AccessControlView";
 import Customer from "@/app/dashboard/pages/Customer";
 import CustomerView from "@/app/dashboard/pages/Customer/CustomerView";
 import AdminProducts from "@/app/dashboard/pages/AdminProducts";
+import ResourcePage from "@/app/dashboard/pages/Resource/Resource";
 import NumbersOperations from "@/app/dashboard/pages/NumbersOps";
-import Subscriptions from "@/app/dashboard/pages/Subscriptions";
-import Transactions from "@/app/dashboard/pages/Transactions";
-import AdminCreateProducts from "@/app/dashboard/pages/AdminProducts/CreateProducts";
-import AdminCreatePlans from "@/app/dashboard/pages/AdminProducts/CreatePlans";
-import PlansTable from "@/app/dashboard/pages/AdminProducts/PlansTables";
+// import AdminCreateProducts from "@/app/dashboard/pages/AdminProducts/CreateProducts";
 import AssignNumberOperations from "@/app/dashboard/pages/NumbersOps/AssignNumberOperations";
 
 const router = createBrowserRouter([
@@ -52,91 +35,14 @@ const router = createBrowserRouter([
         path: `/${URLs.Resources}`,
         element: <Outlet />,
       },
-      {
-        path: `/${URLs.Home_Help}`,
-        element: <Help />,
-      },
-      {
-        path: `/${URLs.Product_Plans}`,
-        element: <Outlet />,
-        children: [
-          { index: true, element: <LandingPagePlan /> },
-          {
-            path: URLs.Product_Plans_PaygA,
-            element: <Payga />,
-          },
-          {
-            path: URLs.Product_Plans_TalkLonger,
-            element: <TalkLonger />,
-          },
-          {
-            path: URLs.Product_Plans_DataOnly,
-            element: <DataOnly />,
-          },
-        ],
-      },
-      {
-        path: `/${URLs.Order_Sim}`,
-        element: <Outlet />,
-        children: [
-          {
-            index: true,
-            element: <OrderPlan />,
-          },
-          {
-            path: `${URLs.Order_Preview}/:type/payment`,
-            element: <OrderPreview />,
-          },
-          {
-            path: `${URLs.Order_Payment}/:id/:type`,
-            element: <OrderPreview />,
-          },
-        ],
-      },
-      {
-        path: `/${URLs.Home_Rates}`,
-        element: <Outlet />,
-        children: [
-          {
-            index: true,
-            element: <LandingPageRates />,
-          },
-          {
-            path: URLs.Home_Rates_Special,
-            element: <LandingPageRates />,
-          },
-          {
-            path: URLs.Home_Rates_International,
-            element: <InternationalCallingRates />,
-          },
-          {
-            path: URLs.Home_Rates_Roaming,
-            element: <RoamingRates />,
-          },
-        ],
-      },
-      {
-        path: `/${URLs.Why_Talk4}`,
-        element: <Outlet />,
-        children: [
-          {
-            index: true,
-            element: <WhyTalk4 />,
-          },
-          {
-            path: URLs.Why_Talk4,
-            element: <WhyTalk4 />,
-          },
-          {
-            path: URLs.Why_Talk4_Us,
-            element: <WhyUs />,
-          },
-          {
-            path: URLs.Why_Talk4_Transfer,
-            element: <Transfer />,
-          },
-        ],
-      },
+      // {
+      //   path: `/${URLs.Home_Help}`,
+      //   element: <Help />,
+      // },
+      
+      
+     
+     
       {
         path: `/${URLs.Login}`,
         element: <Login />,
@@ -198,25 +104,24 @@ const router = createBrowserRouter([
               },
               {
                 path: `/${includeDashboardUrl(URLs.Products)}`,
-                element: <Outlet />,
+                element: <ResourcePage />,
                 children: [
-                  { index: true, element: <AdminProducts /> },
                   {
                     path: ":id/admin",
                     element: <AccessControlView />,
                   },
-                  {
-                    path: "create",
-                    element: <AdminCreateProducts />,
-                  },
-                  {
-                    path: ":id/:name",
-                    element: <AdminCreatePlans />,
-                  },
-                  {
-                    path: "plans/:id/:name",
-                    element: <PlansTable />,
-                  },
+                  // {
+                  //   path: "create",
+                  //   element: <AdminCreateProducts />,
+                  // },
+                  // {
+                  //   path: ":id/:name",
+                  //   element: <AdminCreatePlans />,
+                  // },
+                  // {
+                  //   path: "plans/:id/:name",
+                  //   element: <PlansTable />,
+                  // },
                 ],
               },
               {
@@ -234,7 +139,6 @@ const router = createBrowserRouter([
                 path: `/${includeDashboardUrl(URLs.Subscriptions)}`,
                 element: <Outlet />,
                 children: [
-                  { index: true, element: <Subscriptions /> },
                   {
                     path: ":id/admin",
                     element: <CustomerView />,
@@ -245,14 +149,13 @@ const router = createBrowserRouter([
                 path: `/${includeDashboardUrl(URLs.Transactions)}`,
                 element: <Outlet />,
                 children: [
-                  { index: true, element: <Transactions /> },
                   {
                     path: ":id/admin",
                     element: <CustomerView />,
                   },
                 ],
               },
-              {
+                {
                 path: `/${includeDashboardUrl(URLs.Plans)}`,
                 element: <Outlet />,
                 children: [
@@ -278,6 +181,7 @@ const router = createBrowserRouter([
                   },
                 ],
               },
+              
 
               // {
               //   path: `/${includeDashboardUrl(URLs.TopUp)}`,
@@ -289,7 +193,7 @@ const router = createBrowserRouter([
               // },
               {
                 path: `/${includeDashboardUrl(URLs.Payments)}`,
-                element: <History />,
+                element: <ResourcePage  />,
               },
               {
                 path: `/${includeDashboardUrl(URLs.Porting_Details)}`,
@@ -305,19 +209,19 @@ const router = createBrowserRouter([
                 children: [
                   {
                     index: true,
-                    element: <Rates key={URLs.Plan_Monthly} />,
+                    element: <ResourcePage />,
                   },
                   {
                     path: URLs.Rates_International,
-                    element: <Rates key={URLs.Plan_Monthly} />,
+                    element: <ResourcePage  />,
                   },
                   {
                     path: URLs.Rates_National,
-                    element: <NationalRates key={URLs.Plan_PayG} />,
+                    element: <AdminProducts commentId="" />,
                   },
                   {
                     path: URLs.Rates_Roaming,
-                    element: <Rates key={URLs.Plan_International} />,
+                    element: <AdminProducts commentId="" />,
                   },
                 ],
               },

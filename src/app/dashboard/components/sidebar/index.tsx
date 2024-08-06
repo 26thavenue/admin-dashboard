@@ -24,12 +24,12 @@ function DBSidebar() {
         isOpen ? "block" : "hidden"
       } z-10 md:z-0 md:block fixed md:relative h-[100vh] w-[100%] md:w-2/12 bg-blue text-white`}
     >
-      <img
+      {/* <img
         className=" w-[50%] md:w-[70%] block mx-auto my-3"
         src={""}
         alt={"logo"}
-      />
-      <div className="flex flex-col mt-2 gap-4 py-4 px-2">
+      /> */}
+      <div className="flex flex-col mt-16 gap-4 py-4 px-2">
         {NavLinks(SidebarContentTypes.Main).map((link: TNavLinks) => {
           return <SidebarNavs {...link} />;
         })}

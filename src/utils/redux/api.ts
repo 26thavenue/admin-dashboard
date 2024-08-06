@@ -20,7 +20,7 @@ const handleErrorResponse = (body: ErrorResponse | undefined) => {
 };
 
 export const api = fetchBaseQuery({
-  baseUrl: process.env.REACT_APP_BASEURL,
+  baseUrl: process.env.REACT_APP_BASEURL ,
   prepareHeaders: (headers) => {
     return headers;
   },
